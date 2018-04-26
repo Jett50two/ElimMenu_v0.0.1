@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
  * Created by Tim C. on 3/4/2018.
  */
 
-public class SettingsTables extends AppCompatActivity {
+public class settingsTables extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

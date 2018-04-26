@@ -9,7 +9,7 @@ import android.widget.CheckBox;
  * Created by TIm C. on 3/3/2018.
  */
 
-public class MainMenu extends AppCompatActivity {
+public class menu extends AppCompatActivity {
 
     public CheckBox[] chkArray = new CheckBox[5];
     @Override

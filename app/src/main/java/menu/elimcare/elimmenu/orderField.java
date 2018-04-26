@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
  * Created by Omega on 3/2/2018.
  */
 
-public class OrderField extends AppCompatActivity {
+public class orderField extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

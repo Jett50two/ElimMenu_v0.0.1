@@ -39,15 +39,15 @@ public class settings extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rooms: {
-                Intent iRooms = new Intent(this, SettingRooms.class);
+                Intent iRooms = new Intent(this, settingRooms.class);
                 startActivity(iRooms);
                 break;
             }case R.id.menu: {
-                Intent iMenu = new Intent(this, SettingsMenu.class);
+                Intent iMenu = new Intent(this, settingsMenuDisplay.class);
                 startActivity(iMenu);
                 break;
             }case R.id.numOfTables: {
-                Intent iTables = new Intent(this, SettingsTables.class);
+                Intent iTables = new Intent(this, settingsTables.class);
                 startActivity(iTables);
                 break;
             }

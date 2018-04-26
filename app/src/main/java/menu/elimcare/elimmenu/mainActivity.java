@@ -14,7 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class mainActivity extends AppCompatActivity implements View.OnClickListener {
     // save and load class
     public saveAndLoad sAndL;
 
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
             // load orders class
             case R.id.orders: {
-                Intent iLocation = new Intent(this, Location.class);
+                Intent iLocation = new Intent(this, location.class);
                 startActivity(iLocation);
                 // Toast.makeText(getApplicationContext(),"Test press on textview",Toast.LENGTH_LONG).show();
                 break;
