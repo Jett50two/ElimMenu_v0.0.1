@@ -96,6 +96,45 @@ public class saveAndLoad {
         }
     }
 
+    public static void save2dMenu(String filename, String[][] array2D, Context context){
+        FileOutputStream fos = null;
+        File file = new File(filename);
+        try {
+            fos = new FileOutputStream(file);
+        }
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+            Toast.makeText(context.getApplicationContext(), "Error with save data: " + e, Toast.LENGTH_LONG).show();
+        }
+        try {
+            try {
+                for (int i = 0; i < 4; i++){
+                    for (int j = 0; j < 7; j++){
+                        fos.write(array2D[i][j].getBytes());
+                        log.d(TAGsave, "Line " + i + ":" + array2D[i][j] + "\n");
+                        if (i < 4 && j < 6) {
+                            fos.write("\n".getBytes());
+                        }
+                    }
+                }
+                Toast.makeText(context.getApplicationContext(), "Creating save data...", Toast.LENGTH_LONG).show();
+            }
+            catch (IOException e){
+                e.printStackTrace();
+                Toast.makeText(context.getApplicationContext(), "Error with save data: " + e, Toast.LENGTH_LONG).show();
+            }
+        }
+        finally {
+            try {
+                fos.close();
+            }
+            catch (IOException e){
+                e.printStackTrace();
+                Toast.makeText(context.getApplicationContext(), "Error with save data: " + e, Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
     /**
      * This is for updating room information
      * @param filename = file name/path
