@@ -56,5 +56,4 @@ public class settingsMenuDisplay extends AppCompatActivity implements View.OnCli
             }
         }
     }
-
 }

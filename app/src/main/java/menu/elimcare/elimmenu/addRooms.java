@@ -236,7 +236,7 @@ public class addRooms extends AppCompatActivity implements View.OnClickListener 
     /**
      * make sure that the hallway name is not null or empty.
      * Yes, it is the same as checkName(), but this is meant to be boolean instead of returning a String.
-     * @param name = hakk way bane
+     * @param name = hall way name
      * @return
      */
     private boolean checkHallName (String name){

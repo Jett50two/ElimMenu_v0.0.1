@@ -17,7 +17,7 @@ import java.util.List;
 
 public class settingRooms extends AppCompatActivity implements View.OnClickListener {
     public saveAndLoad sAndL;
-    String filename, roomNumber, nextCell, hallName;
+    String filename = getApplicationContext().getFilesDir().getPath().toString(), roomNumber, nextCell, hallName;
     expandableListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
@@ -75,7 +75,6 @@ public class settingRooms extends AppCompatActivity implements View.OnClickListe
                 try {
                     int numCheck = Integer.parseInt(roomNumber);
                     nextCell = listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition+1);
-                    filename = getApplicationContext().getFilesDir().getPath().toString();
                     sAndL.saveRoom(filename, hallName + "-" + roomNumber, getApplicationContext());
                     editRooms(roomNumber, filename + hallName + "-");
 
