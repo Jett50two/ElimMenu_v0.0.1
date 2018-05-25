@@ -11,13 +11,14 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 /**
  * Created by Tim C. on 3/3/2018.
  */
 
 public class saveAndLoad {
-    public static Log log;
+    private static Log log;
     private static final String TAGsave = "saveAndLoad, FILE SAVE";
 
     /**
@@ -102,9 +103,10 @@ public class saveAndLoad {
      * @param data = data being saved
      * @param context = toasts
      */
-    public static void saveRoom(String filename, String[] data, Context context){
+    public static void saveRoom(String filepath, String filename, String hallname, String[] data, Context context){
+        updateHallInfo(filepath, hallname, data, context);
         FileOutputStream fos = null;
-        File file = new File(filename);
+        File file = new File(filepath + filename);
         // clear out any possible blank lines in the array
         String str = "";
         for(int i = 0; i < data.length; i++){
@@ -119,6 +121,145 @@ public class saveAndLoad {
             str = str + data[i] + "/";
         }
         String[] saveData = str.split("/");
+
+        try {
+            fos = new FileOutputStream(file);
+        }
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+            Toast.makeText(context.getApplicationContext(), "Error with save data: " + e, Toast.LENGTH_LONG).show();
+        }
+        try {
+            try {
+                for (int i = 0; i<saveData.length; i++){
+                    fos.write(saveData[i].getBytes());
+                    log.d("saveRoom", "Line " + i + ":" + saveData[i] + "\n");
+                    if (i < saveData.length - 1) {
+                        fos.write("\n".getBytes());
+                    }
+                }
+                Toast.makeText(context.getApplicationContext(), "Creating save data...", Toast.LENGTH_LONG).show();
+            }
+            catch (IOException e){
+                e.printStackTrace();
+                Toast.makeText(context.getApplicationContext(), "Error with save data: " + e, Toast.LENGTH_LONG).show();
+            }
+        }
+        finally {
+            try {
+                fos.close();
+            }
+            catch (IOException e){
+                e.printStackTrace();
+                Toast.makeText(context.getApplicationContext(), "Error with save data: " + e, Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    private static void updateHallInfo(String filepath, String hallName, String[] data, Context context){
+        log.d("updateHall", "filepath = " + filepath
+                + "\nhallName = " + hallName
+                + "\ndata = " + Arrays.toString(data)
+                + "\ncontext = " + context);
+        FileOutputStream fos = null;
+        File file = new File(filepath + "rooms.txt");
+        String[] loadData = loadData(filepath + "rooms.txt", context);
+        String[] contentsOfFile;
+        String str = "";
+        for (int i = 0; i<loadData.length; i++){
+            log.d("updateHall", "loadData [" + i + "] = " + loadData[i]);
+            if(loadData[i].equals(hallName)){
+                log.d("updateHall", loadData[i] + " = " + hallName);
+                contentsOfFile = loadData[i+1].split(",");
+                for (int j = 0; j < contentsOfFile.length; j++){
+                    if(j == 0){
+                        if(contentsOfFile[j].equals(data [0])){
+                            str = contentsOfFile[j];
+                            str = str + "," + data[1] + " " + data[2];
+                            j++;
+                        } else {
+                            str = contentsOfFile[j];
+                        }
+                    } else {
+                        if(contentsOfFile[j].equals(data [0])){
+                            str = str + "," + contentsOfFile[j];
+                            str = str + "," + data[1] + " " + data[2];
+                            j++;
+                        } else {
+                            str = str + "," + contentsOfFile[j];
+                        }
+                    }
+                    log.d("updateHall", "str = " + str
+                            +"\nj = " + j);
+                }
+            }
+        }
+        log.d("updateHall", "str = " + str);
+        for (int i = 0; i<loadData.length; i++){
+            if(loadData[i].equals(hallName)){
+                loadData[i+1] = str;
+            }
+
+            log.d("updateHall", "loadData[" + i + "] = " + str);
+        }
+        try {
+            fos = new FileOutputStream(file);
+        }
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+            Toast.makeText(context.getApplicationContext(), "Error with save data: " + e, Toast.LENGTH_LONG).show();
+        }
+        try {
+            try {
+                for (int i = 0; i<loadData.length; i++){
+                    fos.write(loadData[i].getBytes());
+                    log.d("updateHall", "Line " + i + ":" + loadData[i] + "\n");
+                    if (i < loadData.length - 1) {
+                        fos.write("\n".getBytes());
+                    }
+                }
+                Toast.makeText(context.getApplicationContext(), "Creating save data...", Toast.LENGTH_LONG).show();
+            }
+            catch (IOException e){
+                e.printStackTrace();
+                Toast.makeText(context.getApplicationContext(), "Error with save data: " + e, Toast.LENGTH_LONG).show();
+            }
+        }
+        finally {
+            try {
+                fos.close();
+            }
+            catch (IOException e){
+                e.printStackTrace();
+                Toast.makeText(context.getApplicationContext(), "Error with save data: " + e, Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    /**
+     * Just a basic save option. nothing special to it. just save information.
+     * @param filepath = path to the file
+     * @param data = information for saving
+     * @param context = context
+     */
+    public static void basicSave(String filepath, String[] data, Context context){
+        FileOutputStream fos = null;
+        File file = new File(filepath);
+        // clear out any possible blank lines in the array
+        String str = "";
+        for(int i = 0; i < data.length; i++){
+            if(data[i].equals(null) || data[i].equals("")){
+                // do nothing
+            }else {
+                str = str + data[i] + "/";
+            }
+        }
+
+        for (int i = 0; i<data.length; i++){
+            str = str + data[i] + "/";
+        }
+        String[] saveData = str.split("/");
+
         try {
             fos = new FileOutputStream(file);
         }
@@ -159,7 +300,7 @@ public class saveAndLoad {
      * @param data = takes new data being saved.
      * @return return the combined values
      */
-    public static String[] clearBlankOnSave(String[] loadData, String[] data){
+    private static String[] clearBlankOnSave(String[] loadData, String[] data){
         String str = "";
         for(int i = 0; i < loadData.length; i++){
             if(loadData[i].equals(null) || loadData[i].equals("")){
@@ -223,7 +364,7 @@ public class saveAndLoad {
      * @param loadData = only load data from file.
      * @return
      */
-    public static String[] clearBlankOnLoad(String[] loadData){
+    private static String[] clearBlankOnLoad(String[] loadData){
         String str = "";
         for(int i = 0; i < loadData.length; i++){
             if(loadData[i].equals(null) || loadData[i].equals("")){
@@ -242,9 +383,9 @@ public class saveAndLoad {
      * @param roomNum = room number.
      * @param context
      */
-    public static void saveRoom(String filename, String roomNum, Context context){
+    public static void saveHall(String filename, String roomNum, Context context){
         try {
-            filename = filename + "-" + roomNum + ".txt";
+            filename = filename + roomNum;
             File file = new File(filename);
             if (!file.exists()) {
                 file.createNewFile();

@@ -14,7 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class mainActivity extends AppCompatActivity implements View.OnClickListener {
     // save and load class
     public saveAndLoad sAndL;
 
@@ -26,14 +26,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // call the file check method
         check();
         // Textviews
-        TextView view1 = findViewById(R.id.orders);
-        TextView view2 = findViewById(R.id.settings);
-        TextView testView = findViewById(R.id.textView3);
+        TextView orders = findViewById(R.id.orders);
+        TextView settings = findViewById(R.id.settings);
+        TextView location = findViewById(R.id.location);
 
         // create on click listeners
-        view1.setOnClickListener(this);
-        view2.setOnClickListener(this);
-        testView.setOnClickListener(this);
+        orders.setOnClickListener(this);
+        settings.setOnClickListener(this);
+        location.setOnClickListener(this);
     }
 
     /**
@@ -78,8 +78,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
             // load orders class
             case R.id.orders: {
-                Intent iLocation = new Intent(this, Location.class);
-                startActivity(iLocation);
+                Intent iOrder = new Intent(this, orderField.class);
+                startActivity(iOrder);
                 // Toast.makeText(getApplicationContext(),"Test press on textview",Toast.LENGTH_LONG).show();
                 break;
             }
@@ -89,8 +89,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(iSettings);
                 break;
             }
-            case R.id.textView3: {
-
+            case R.id.location: {
+                Intent iLocation = new Intent(this, location.class);
+                startActivity(iLocation);
+                // Toast.makeText(getApplicationContext(),"Test press on textview",Toast.LENGTH_LONG).show();
             }
         }
     }

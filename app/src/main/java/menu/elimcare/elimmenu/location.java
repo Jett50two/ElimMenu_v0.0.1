@@ -1,28 +1,31 @@
 package menu.elimcare.elimmenu;
 
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by Tim C. on 3/4/2018.
+ * Created by Omega on 3/1/2018.
  */
 
-public class SettingRooms extends AppCompatActivity implements View.OnClickListener {
+public class location extends AppCompatActivity {
     public saveAndLoad sAndL;
-    String filename, roomNumber, nextCell, hallName;
-    ExpandableListAdapter listAdapter;
+    Context context;
+    String filename, iextra;
+    expandableListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
+    Log log;
 
     // This is numbers, hall0 = hall'zero', hall1 = hall'one'.
     List<String> hall0 = new ArrayList<>(), hall1 = new ArrayList<>(),
@@ -30,27 +33,23 @@ public class SettingRooms extends AppCompatActivity implements View.OnClickListe
             hall4 = new ArrayList<>(), hall5 = new ArrayList<>(),
             hall6 = new ArrayList<>(), hall7 = new ArrayList<>(),
             hall8 = new ArrayList<>(), hall9 = new ArrayList<>();
-    /**
-     * Get information and save into as few files as possible.
-     * hallway file: west,east,south,north
-     * room files - west: 102,103,104... - east: 114,115,116...
-     * also, add names, diets and restriction to the room files.
-     *
-     * @param savedInstanceState
-     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings_rooms);
+        setContentView(R.layout.location);
 
-        // set values for the expandable list
+        // Get extras from the intent
+        Bundle extras = getIntent().getExtras();
+        // make sure there is an extra in the intent
+        if(extras == null) {
+            iextra = null;
+            log.d("extras is null","There are no extras"  + "\n\n");
+        } else {
+            iextra = extras.getString("getInfo");
+            log.d("extras has info","extras: " + iextra + "\n\n");
+        }
         listView();
-
-        // get button
-        TextView newHall = findViewById(R.id.addHall);
-        newHall.setOnClickListener(this);
-        // TextView newRoom = findViewById(R.id.cNewRoom);
-        // newRoom.setOnClickListener(this);
     }
 
     /**
@@ -63,7 +62,7 @@ public class SettingRooms extends AppCompatActivity implements View.OnClickListe
         // preparing list data
         prepareListData();
 
-        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+        listAdapter = new expandableListAdapter(this, listDataHeader, listDataChild);
 
         // setting list adapter
         expListView.setAdapter(listAdapter);
@@ -71,64 +70,71 @@ public class SettingRooms extends AppCompatActivity implements View.OnClickListe
         expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                roomNumber = listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
-                hallName = listDataHeader.get(groupPosition);
-                try {
-                    int numCheck = Integer.parseInt(roomNumber);
-                    nextCell = listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition+1);
-                    filename = getApplicationContext().getFilesDir().getPath().toString();
-                    sAndL.saveRoom(filename, hallName + "-" + roomNumber, getApplicationContext());
-                    editRooms(roomNumber, filename + hallName + "-");
-
-                    // Toast.makeText(getApplicationContext(), listDataHeader.get(groupPosition), Toast.LENGTH_SHORT).show();
-
-                } catch (NumberFormatException e) {
-                    // Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT).show();
-                    return false;
+                String roomNumber = listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
+                String hallName = listDataHeader.get(groupPosition);
+                String[] roomInfo = getRoomInfo(roomNumber, hallName);
+                if (roomInfo.length > 1) {
+                    if (iextra.equals("location")) {
+                        Toast.makeText(getApplicationContext(), listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition), Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition), Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Not a room number" + listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition), Toast.LENGTH_SHORT).show();
                 }
                 return false;
             }
         });
     }
 
-    /**
-     * On Click
-     * @param view
-     */
-    public void onClick(View view) {
-        String addNew;
-        switch (view.getId()) {
-            case R.id.addHall: {
-                Intent iNewRoom = new Intent(this, addRooms.class);
-                addNew = "hall";
-                iNewRoom.putExtra("layout", addNew);
-                startActivity(iNewRoom);
-                // Toast.makeText(getApplicationContext(),"Test press on textview",Toast.LENGTH_LONG).show();
-                break;
-            }
-            case R.id.cNewRoom: {
-                Intent iNewRoom = new Intent(this, addRooms.class);
-                addNew = "room";
-                iNewRoom.putExtra("layout", addNew);
-                startActivity(iNewRoom);
-                // Toast.makeText(getApplicationContext(),"Test press on textview",Toast.LENGTH_LONG).show();
-                break;
-            }
-        }
-    }
+    private String[] getRoomInfo(String roomNumber, String hallName){
+        String[] getRoomInfo;
 
-    /**
-     * Edit rooms
-     * @param roomNumber
-     * @param filename
-     */
-    public void editRooms(String roomNumber, String filename){
-        Intent iEditRoom = new Intent(this, addRooms.class);
-        String addNew = "room";
-        iEditRoom.putExtra("layout", addNew);
-        iEditRoom.putExtra( "roomNumber", roomNumber);
-        iEditRoom.putExtra("filename", filename);
-        startActivity(iEditRoom);
+        File file = new File(getApplicationContext() + hallName + "-" + roomNumber + ".txt");
+        if(file.exists()) {
+            try {
+                int numCheck = Integer.parseInt(roomNumber);
+                log.d("settingsRooms", "");
+                String[] loadedData = sAndL.loadData(getApplicationContext() + hallName + "-" + numCheck + ".txt", this);
+                for (int i = 0; i < loadedData.length; i++) {
+                    if (loadedData[i].equals(numCheck)) {
+                        log.d("Loaded Data", "Line" + i + ": " + loadedData[i] + "\n");
+                        // Do nothing
+                    } else if (i == 1) {
+                        // set text for first name
+                        log.d("Loaded Data", "Line" + i + ": " + loadedData[i] + "\n");
+                    } else if (i == 2) {
+                        // set text for last name
+                        log.d("Loaded Data", "Line" + i + ": " + loadedData[i] + "\n");
+                    } else if (i == 3) {
+                        // set text for food diet
+                        log.d("Loaded Data", "Line" + i + ": " + loadedData[i] + "\n");
+                    } else if (i == 4) {
+                        // set text for fluid restriction
+                        log.d("Loaded Data", "Line" + i + ": " + loadedData[i] + "\n");
+                    } else if (i == 5) {
+                        // set text for other notes that have been entered.
+                        log.d("Loaded Data", "Line" + i + ": " + loadedData[i] + "\n");
+                    } else {
+                        // debug possible errors.
+                        log.d("Loaded Data", "Line" + i + ": " + loadedData[i] + "\n");
+                    }
+                }
+                getRoomInfo = loadedData;
+                return getRoomInfo;
+
+            } catch (NumberFormatException e) {
+                getRoomInfo = new String[]{"notNumber"};
+                log.d("Loaded Data", "Array Length" + getRoomInfo.length + "\n");
+                return getRoomInfo;
+            }
+        } else {
+            getRoomInfo = new String[]{"noFile"};
+            log.d("Loaded Data", "Array Length" + getRoomInfo.length + "\n");
+        }
+        return getRoomInfo;
     }
 
     /**
@@ -136,9 +142,10 @@ public class SettingRooms extends AppCompatActivity implements View.OnClickListe
      */
     private void prepareListData() {
         // call to expListLoader.class to load information from the file.
-        filename = getApplicationContext().getFilesDir().getPath().toString() + "rooms.txt";
+        context = getApplicationContext();
+        filename = context.getFilesDir().getPath().toString() + "rooms.txt";
         // load information from saveAndLoad
-        String[] split = sAndL.loadData(filename, getApplicationContext());
+        String[] split = sAndL.loadData(filename, context);
         // call to expListLoader.class to handle the information that was read.
 
         listDataHeader = new ArrayList<String>();
