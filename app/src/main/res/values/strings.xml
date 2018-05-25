@@ -2,8 +2,8 @@
     <string name="app_name">Elim Menu</string>
     <string name="action_settings">Settings</string>
     <string name="menu_diet">Diet: </string>
-    <string name="menu_meal">Meal</string>
-    <string name="menu_side">Sides</string>
-    <string name="menu_drink">Beverages</string>
-    <string name="menu_desert">Desert</string>
+    <string name="menu_meal">Meal:</string>
+    <string name="menu_side">Sides:</string>
+    <string name="menu_drink">Beverages:</string>
+    <string name="menu_desert">Desert:</string>
 </resources>

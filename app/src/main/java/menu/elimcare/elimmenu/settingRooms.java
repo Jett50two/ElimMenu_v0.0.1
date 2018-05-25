@@ -3,6 +3,7 @@ package menu.elimcare.elimmenu;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
@@ -16,8 +17,9 @@ import java.util.List;
  */
 
 public class settingRooms extends AppCompatActivity implements View.OnClickListener {
-    public saveAndLoad sAndL;
-    String filename = getApplicationContext().getFilesDir().getPath().toString(), roomNumber, nextCell, hallName;
+    private static Log log;
+    private saveAndLoad sAndL;
+    String filename, roomNumber, nextCell, hallName;
     expandableListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
@@ -75,8 +77,12 @@ public class settingRooms extends AppCompatActivity implements View.OnClickListe
                 try {
                     int numCheck = Integer.parseInt(roomNumber);
                     nextCell = listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition+1);
-                    sAndL.saveRoom(filename, hallName + "-" + roomNumber, getApplicationContext());
-                    editRooms(roomNumber, filename + hallName + "-");
+                    log.d("settingsRooms", "filename = " + filename
+                            + "\nhallName = " + hallName
+                            + "\nroomNumber = " + roomNumber
+                            + "\ncomplete path = " + filename + hallName + "-" + roomNumber + ".txt");
+                    sAndL.saveHall(filename, hallName + "-" + roomNumber + ".txt", getApplicationContext());
+                    editRooms(roomNumber, filename, hallName);
 
                     // Toast.makeText(getApplicationContext(), listDataHeader.get(groupPosition), Toast.LENGTH_SHORT).show();
 
@@ -120,12 +126,13 @@ public class settingRooms extends AppCompatActivity implements View.OnClickListe
      * @param roomNumber
      * @param filename
      */
-    public void editRooms(String roomNumber, String filename){
+    public void editRooms(String roomNumber, String filename, String hallName){
         Intent iEditRoom = new Intent(this, addRooms.class);
         String addNew = "room";
         iEditRoom.putExtra("layout", addNew);
         iEditRoom.putExtra( "roomNumber", roomNumber);
         iEditRoom.putExtra("filename", filename);
+        iEditRoom.putExtra("hallName", hallName);
         startActivity(iEditRoom);
     }
 
@@ -134,9 +141,9 @@ public class settingRooms extends AppCompatActivity implements View.OnClickListe
      */
     private void prepareListData() {
         // call to expListLoader.class to load information from the file.
-        filename = getApplicationContext().getFilesDir().getPath().toString() + "rooms.txt";
+        filename = getApplicationContext().getFilesDir().getPath().toString();
         // load information from saveAndLoad
-        String[] split = sAndL.loadData(filename, getApplicationContext());
+        String[] split = sAndL.loadData(filename + "rooms.txt", getApplicationContext());
         // call to expListLoader.class to handle the information that was read.
 
         listDataHeader = new ArrayList<String>();

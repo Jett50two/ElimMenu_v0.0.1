@@ -10,13 +10,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class addRooms extends AppCompatActivity implements View.OnClickListener {
-    public static Log log;
+    private static Log log;
     private static final String TAGpointer = "Check Null Pointer";
     public saveAndLoad sAndL;
     // global ints
     int lowNum, highNum;
     // global Strings
-    String iLayout, iRoomNumber, iFilename, strHallName, strLowNum, strHighNum;
+    String iLayout, iRoomNumber, iFilepath, iHallName, strHallName, strLowNum, strHighNum;
     // Buttons
     Button cancel, save;
     // EditText
@@ -40,7 +40,8 @@ public class addRooms extends AppCompatActivity implements View.OnClickListener 
         } else {
             iLayout = extras.getString("layout");
             iRoomNumber = extras.getString("roomNumber");
-            iFilename = extras.getString("filename");
+            iFilepath = extras.getString("filename");
+            iHallName = extras.getString("hallName");
             changeDisplay();
         }
     }
@@ -111,7 +112,7 @@ public class addRooms extends AppCompatActivity implements View.OnClickListener 
             etRoomID.setText(String.valueOf(""));
             // Toast.makeText(getApplicationContext(), "Unknown Error: " + e, Toast.LENGTH_LONG).show();
         }
-        String[] loadedData = sAndL.loadData(iFilename + iRoomNumber + ".txt", this);
+        String[] loadedData = sAndL.loadData(iFilepath + iHallName + "-" + iRoomNumber + ".txt", this);
         for (int i = 0; i< loadedData.length; i++){
             if(loadedData[i]. equals(iRoomNumber)){
                 // Do nothing
@@ -205,7 +206,7 @@ public class addRooms extends AppCompatActivity implements View.OnClickListener 
                 other = checkName(etOther.getText().toString());
 
                 String[] data = {roomID, firstName, lastName, foodDiet, fluidRestric, other};
-                sAndL.saveRoom(iFilename + iRoomNumber + ".txt", data, this);
+                sAndL.saveRoom(iFilepath, iHallName + "-" + iRoomNumber + ".txt", iHallName, data, this);
                 finish();
                 break;
             }
@@ -240,7 +241,7 @@ public class addRooms extends AppCompatActivity implements View.OnClickListener 
      * @return
      */
     private boolean checkHallName (String name){
-        name.trim();
+        name = name.trim();
         if (name.equals(null)) {
             Toast.makeText(getApplicationContext(), "Error: Name is NULL", Toast.LENGTH_LONG).show();
             return false;

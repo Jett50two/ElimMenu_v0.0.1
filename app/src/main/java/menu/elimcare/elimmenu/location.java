@@ -3,10 +3,12 @@ package menu.elimcare.elimmenu;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,11 +20,12 @@ import java.util.List;
 public class location extends AppCompatActivity {
     public saveAndLoad sAndL;
     Context context;
-    String filename;
+    String filename, iextra;
     expandableListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
+    Log log;
 
     // This is numbers, hall0 = hall'zero', hall1 = hall'one'.
     List<String> hall0 = new ArrayList<>(), hall1 = new ArrayList<>(),
@@ -36,6 +39,16 @@ public class location extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.location);
 
+        // Get extras from the intent
+        Bundle extras = getIntent().getExtras();
+        // make sure there is an extra in the intent
+        if(extras == null) {
+            iextra = null;
+            log.d("extras is null","There are no extras"  + "\n\n");
+        } else {
+            iextra = extras.getString("getInfo");
+            log.d("extras has info","extras: " + iextra + "\n\n");
+        }
         listView();
     }
 
@@ -57,10 +70,71 @@ public class location extends AppCompatActivity {
         expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                Toast.makeText(getApplicationContext(), listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition), Toast.LENGTH_SHORT).show();
+                String roomNumber = listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
+                String hallName = listDataHeader.get(groupPosition);
+                String[] roomInfo = getRoomInfo(roomNumber, hallName);
+                if (roomInfo.length > 1) {
+                    if (iextra.equals("location")) {
+                        Toast.makeText(getApplicationContext(), listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition), Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition), Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Not a room number" + listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition), Toast.LENGTH_SHORT).show();
+                }
                 return false;
             }
         });
+    }
+
+    private String[] getRoomInfo(String roomNumber, String hallName){
+        String[] getRoomInfo;
+
+        File file = new File(getApplicationContext() + hallName + "-" + roomNumber + ".txt");
+        if(file.exists()) {
+            try {
+                int numCheck = Integer.parseInt(roomNumber);
+                log.d("settingsRooms", "");
+                String[] loadedData = sAndL.loadData(getApplicationContext() + hallName + "-" + numCheck + ".txt", this);
+                for (int i = 0; i < loadedData.length; i++) {
+                    if (loadedData[i].equals(numCheck)) {
+                        log.d("Loaded Data", "Line" + i + ": " + loadedData[i] + "\n");
+                        // Do nothing
+                    } else if (i == 1) {
+                        // set text for first name
+                        log.d("Loaded Data", "Line" + i + ": " + loadedData[i] + "\n");
+                    } else if (i == 2) {
+                        // set text for last name
+                        log.d("Loaded Data", "Line" + i + ": " + loadedData[i] + "\n");
+                    } else if (i == 3) {
+                        // set text for food diet
+                        log.d("Loaded Data", "Line" + i + ": " + loadedData[i] + "\n");
+                    } else if (i == 4) {
+                        // set text for fluid restriction
+                        log.d("Loaded Data", "Line" + i + ": " + loadedData[i] + "\n");
+                    } else if (i == 5) {
+                        // set text for other notes that have been entered.
+                        log.d("Loaded Data", "Line" + i + ": " + loadedData[i] + "\n");
+                    } else {
+                        // debug possible errors.
+                        log.d("Loaded Data", "Line" + i + ": " + loadedData[i] + "\n");
+                    }
+                }
+                getRoomInfo = loadedData;
+                return getRoomInfo;
+
+            } catch (NumberFormatException e) {
+                getRoomInfo = new String[]{"notNumber"};
+                log.d("Loaded Data", "Array Length" + getRoomInfo.length + "\n");
+                return getRoomInfo;
+            }
+        } else {
+            getRoomInfo = new String[]{"noFile"};
+            log.d("Loaded Data", "Array Length" + getRoomInfo.length + "\n");
+        }
+        return getRoomInfo;
     }
 
     /**

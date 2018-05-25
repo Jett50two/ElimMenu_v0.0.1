@@ -195,13 +195,14 @@ public class settingsMenu extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
+
     public void saveButton(){
         log.d("btnSave", getApplicationContext().getFilesDir().getPath().toString() + "menu.txt" +
                 "\nNumber of weeks = " + numOfWeeks
                 + "\nloop = " + loop + "\nloopBack = " + loopBack
                 + "\nTotal [" + (loop - loopBack) + "]");
         // saveRoom is used because it overwrites the save file.
-        sAndL.saveRoom(getApplicationContext().getFilesDir().getPath().toString() + "menu.txt", userInput, this);
+        sAndL.basicSave(getApplicationContext().getFilesDir().getPath().toString() + "menu.txt", userInput, this);
         finish();
     }
 
@@ -239,15 +240,7 @@ public class settingsMenu extends AppCompatActivity implements View.OnClickListe
                 + "\nfirstLoop = " + loop1
                 + "\nTotal [" + (loop1 - loop1Back) + "]"
                 + "input" + userInput[loop1 - loop1Back]);
-        if (str.length == 5){
-            displayLength5(str);
-        }
-        else if (str.length == 4){
-            displayLength4(str);
-        }
-        else if (str.length == 3){
-            displayLength3(str);
-        }
+        displayLength5(str);
     }
     public void nextDisplay(int loop1, int loop1Back) {
         displayLog("nextDisplay", loop1, loop1Back);
@@ -261,15 +254,7 @@ public class settingsMenu extends AppCompatActivity implements View.OnClickListe
             etDessert.setText("");
         } else {
             String[] str = userInput[loop1 - loop1Back].split("-");
-            if (str.length == 5){
-                displayLength5(str);
-            }
-            else if (str.length == 4){
-                displayLength4(str);
-            }
-            else if (str.length == 3){
-                displayLength3(str);
-            }
+            displayLength5(str);
         }
     }
 
@@ -304,6 +289,8 @@ public class settingsMenu extends AppCompatActivity implements View.OnClickListe
                         "\nstr[3] = " + str[3] +
                         "\nstr[4] = " + str[4]);
     }
+
+    /*
     public void displayLength4(String[] str){
         etPrimaryFood.setText(str[0]);
         etSide1.setText(str[1]);
@@ -324,6 +311,7 @@ public class settingsMenu extends AppCompatActivity implements View.OnClickListe
                         "\nstr[1] = " + str[1] +
                         "\nstr[2] = " + str[2]);
     }
+    */
 
     /**
      * This limits the side dishes in the menu layout. For example,
