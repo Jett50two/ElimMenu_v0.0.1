@@ -1,6 +1,7 @@
 package menu.elimcare.elimmenu;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -20,7 +21,8 @@ import java.util.List;
 public class location extends AppCompatActivity {
     public saveAndLoad sAndL;
     Context context;
-    String filename, iextra;
+    String filename, iLocation;
+    String[] iOldData;
     expandableListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
@@ -43,11 +45,12 @@ public class location extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         // make sure there is an extra in the intent
         if(extras == null) {
-            iextra = null;
+            iLocation = null;
             log.d("extras is null","There are no extras"  + "\n\n");
         } else {
-            iextra = extras.getString("getInfo");
-            log.d("extras has info","extras: " + iextra + "\n\n");
+            iLocation = extras.getString("getInfo");
+            iOldData = extras.getStringArray("getOld");
+            log.d("extras has info","extras: " + iLocation + "\n\n");
         }
         listView();
     }
@@ -72,17 +75,30 @@ public class location extends AppCompatActivity {
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 String roomNumber = listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
                 String hallName = listDataHeader.get(groupPosition);
+
                 String[] roomInfo = getRoomInfo(roomNumber, hallName);
                 if (roomInfo.length > 1) {
-                    if (iextra.equals("location")) {
-                        Toast.makeText(getApplicationContext(), listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition), Toast.LENGTH_SHORT).show();
+                    if (iLocation == null) {
+                        useIntent(roomInfo, null, false);
+                        log.d("Room Number: ", listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition));
+                    }
+                    else if (iLocation.equals("location")) {
+                        useIntent(roomInfo, iOldData, true);
+                        log.d("Room Number: ", listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition));
                     }
                     else {
-                        Toast.makeText(getApplicationContext(), listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition), Toast.LENGTH_SHORT).show();
+                        useIntent(roomInfo, null, false);
+                        log.d("Room Number: ", listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition));
                     }
                 }
                 else {
-                    Toast.makeText(getApplicationContext(), "Not a room number" + listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition), Toast.LENGTH_SHORT).show();
+                    if (roomInfo[0].equals("notNumber")){
+                        log.d("notNumber: ", "not a number");
+                    } else if (roomInfo[0].equals("noFile")) {
+                        log.d("noFile: ", "No file found\n");
+                    } else {
+                        log.d("Unknown: ", "Unknown Error has been hit...\n");
+                    }
                 }
                 return false;
             }
@@ -91,13 +107,14 @@ public class location extends AppCompatActivity {
 
     private String[] getRoomInfo(String roomNumber, String hallName){
         String[] getRoomInfo;
-
-        File file = new File(getApplicationContext() + hallName + "-" + roomNumber + ".txt");
+        String filepath = getApplicationContext().getFilesDir().getPath();
+        File file = new File(filepath + hallName + "-" + roomNumber + ".txt");
+        log.d("FILE: ", filepath + hallName + "-" + roomNumber + ".txt" + "\n");
         if(file.exists()) {
             try {
                 int numCheck = Integer.parseInt(roomNumber);
                 log.d("settingsRooms", "");
-                String[] loadedData = sAndL.loadData(getApplicationContext() + hallName + "-" + numCheck + ".txt", this);
+                String[] loadedData = sAndL.loadData(filepath + hallName + "-" + numCheck + ".txt", this);
                 for (int i = 0; i < loadedData.length; i++) {
                     if (loadedData[i].equals(numCheck)) {
                         log.d("Loaded Data", "Line" + i + ": " + loadedData[i] + "\n");
@@ -127,14 +144,27 @@ public class location extends AppCompatActivity {
 
             } catch (NumberFormatException e) {
                 getRoomInfo = new String[]{"notNumber"};
-                log.d("Loaded Data", "Array Length" + getRoomInfo.length + "\n");
+                log.d("Loaded Data", "Array Length: " + getRoomInfo.length + "\n");
                 return getRoomInfo;
             }
         } else {
             getRoomInfo = new String[]{"noFile"};
-            log.d("Loaded Data", "Array Length" + getRoomInfo.length + "\n");
+            log.d("Loaded Data", "Array Length: " + getRoomInfo.length + "\n");
         }
         return getRoomInfo;
+    }
+
+    private void useIntent(String[] roomInfo, String[] extra, boolean oldData){
+        Intent iMoveData = new Intent(this, orderField.class);
+        iMoveData.putExtra("roomInfo", roomInfo);
+        if (oldData){
+            iMoveData.putExtra("extra", extra);
+            iMoveData.putExtra("oldData", oldData);
+        } else {
+            iMoveData.putExtra("oldData", oldData);
+
+        }
+        startActivity(iMoveData);
     }
 
     /**

@@ -31,7 +31,6 @@ public class orderField extends AppCompatActivity implements View.OnClickListene
         tvRoomNum = findViewById(R.id.tvRoomNum);
         layNameNum = findViewById(R.id.layNameNum);
         tvDiet = findViewById(R.id.tvDiet);
-        layDiet = findViewById(R.id.layDiet);
         tvPrimaryFood = findViewById(R.id.tvPrimary);
         layPrimaryFood = findViewById(R.id.layPrimary);
         tvSide = findViewById(R.id.tvSides);
@@ -42,8 +41,6 @@ public class orderField extends AppCompatActivity implements View.OnClickListene
         layDessert = findViewById(R.id.layDesserts);
 
         layNameNum.setOnClickListener(this);
-        tvDiet.setOnClickListener(this);
-        layDiet.setOnClickListener(this);
         layPrimaryFood.setOnClickListener(this);
         laySide.setOnClickListener(this);
         layDrink.setOnClickListener(this);
@@ -62,12 +59,6 @@ public class orderField extends AppCompatActivity implements View.OnClickListene
                 Toast.makeText(getApplicationContext(),"name and number textview",Toast.LENGTH_LONG).show();
                 break;
             }
-            /*
-            case R.id.layDiet: {
-                Toast.makeText(getApplicationContext(),"diet Layout",Toast.LENGTH_LONG).show();
-                break;
-            }
-            */
             case R.id.layPrimary: {
                 iMenuControl = new Intent(this, menu.class);
                 iMenuControl.putExtra("menuType", "primary");
