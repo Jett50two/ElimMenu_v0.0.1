@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Layout;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,6 +16,9 @@ import android.widget.Toast;
 
 public class orderField extends AppCompatActivity implements View.OnClickListener{
 
+    Log log;
+    String[] iLocation, iOldData;
+    boolean iExtra;
     TextView tvName, tvRoomNum, tvDiet, tvPrimaryFood, tvSide, tvDrink, tvDesserts;
     LinearLayout layDiet, layPrimaryFood, laySide, layDrink, layDessert, layNameNum;
 
@@ -24,6 +28,27 @@ public class orderField extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.order_field);
 
         setValues();
+        // Get extras from the intent
+        Bundle extras = getIntent().getExtras();
+        // make sure there is an extra in the intent
+        if(extras == null) {
+            log.d("extras is null","There are no extras"  + "\n\n");
+        } else {
+            checkBundles(extras);
+        }
+    }
+
+    private void checkBundles(Bundle extras) {
+        iLocation = extras.getStringArray("roomInfo");
+        if(iLocation != null) {
+            tvRoomNum.setText(String.valueOf("Room # " + iLocation[0]));
+            tvName.setText(String.valueOf(iLocation[1] + ", " + iLocation[2]));
+            tvDiet.setText(String.valueOf("Food Restriction:\n\t" + iLocation[3]
+            + "\nFluid Restriction:\n\t" + iLocation[4]
+            + "\nOther Notes:\n\t" + iLocation[5]));
+        }
+        iOldData = extras.getStringArray("getOld");
+        log.d("extras has info","extras: " + iLocation + "\n\n");
     }
 
     private void setValues(){
@@ -54,7 +79,7 @@ public class orderField extends AppCompatActivity implements View.OnClickListene
         switch (view.getId()){
             case R.id.layNameNum:{
                 iMenuControl = new Intent(this, location.class);
-                iMenuControl.putExtra("getInfo", "location");
+                iMenuControl.putExtra("roomInfo", "location");
                 startActivity(iMenuControl);
                 Toast.makeText(getApplicationContext(),"name and number textview",Toast.LENGTH_LONG).show();
                 break;

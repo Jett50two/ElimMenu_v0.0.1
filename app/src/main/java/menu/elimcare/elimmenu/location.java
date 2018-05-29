@@ -48,7 +48,7 @@ public class location extends AppCompatActivity {
             iLocation = null;
             log.d("extras is null","There are no extras"  + "\n\n");
         } else {
-            iLocation = extras.getString("getInfo");
+            iLocation = extras.getString("roomInfo");
             iOldData = extras.getStringArray("getOld");
             log.d("extras has info","extras: " + iLocation + "\n\n");
         }
@@ -154,14 +154,15 @@ public class location extends AppCompatActivity {
         return getRoomInfo;
     }
 
-    private void useIntent(String[] roomInfo, String[] extra, boolean oldData){
+    private void useIntent(String[] roomInfo, String[] oldData, boolean extra){
         Intent iMoveData = new Intent(this, orderField.class);
         iMoveData.putExtra("roomInfo", roomInfo);
-        if (oldData){
-            iMoveData.putExtra("extra", extra);
+        if (extra){
             iMoveData.putExtra("oldData", oldData);
+            iMoveData.putExtra("extra", true);
         } else {
             iMoveData.putExtra("oldData", oldData);
+            iMoveData.putExtra("extra", false);
 
         }
         startActivity(iMoveData);
