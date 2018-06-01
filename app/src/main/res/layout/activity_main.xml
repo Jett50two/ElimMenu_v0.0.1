@@ -88,11 +88,11 @@
                     android:background="#c0c0c0" />
 
                 <TextView
-                    android:id="@+id/textView4"
-                    android:text="TextView"
+                    android:id="@+id/menu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
+                    android:text="Menu"
                     android:textAlignment="center"
                     android:textSize="35dp" />
 

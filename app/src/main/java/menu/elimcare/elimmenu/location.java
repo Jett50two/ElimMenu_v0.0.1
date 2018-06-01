@@ -22,7 +22,7 @@ public class location extends AppCompatActivity {
     public saveAndLoad sAndL;
     Context context;
     String filename, iLocation;
-    String[] iOldData;
+    String[] iOldData, oldRoomInfo;
     expandableListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
@@ -48,11 +48,21 @@ public class location extends AppCompatActivity {
             iLocation = null;
             log.d("extras is null","There are no extras"  + "\n\n");
         } else {
-            iLocation = extras.getString("roomInfo");
-            iOldData = extras.getStringArray("getOld");
-            log.d("extras has info","extras: " + iLocation + "\n\n");
+            iLocation = extras.getString("location");
+            iOldData = extras.getStringArray("oldData");
+            oldRoomInfo = extras.getStringArray("oldRoomInfo");
+            log.d("extras has info","extras: " + iLocation + "\n\n"
+                    + "oldData = " + iOldData + "\n\n oldRoomInfo = " + oldRoomInfo);
         }
         listView();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent iBackToMenu = new Intent(this, orderField.class);
+        iBackToMenu.putExtra("roomInfo", oldRoomInfo);
+        iBackToMenu.putExtra("oldData", iOldData);
+        startActivity(iBackToMenu);
     }
 
     /**
@@ -80,15 +90,18 @@ public class location extends AppCompatActivity {
                 if (roomInfo.length > 1) {
                     if (iLocation == null) {
                         useIntent(roomInfo, null, false);
-                        log.d("Room Number: ", listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition));
+                        log.d("Room Number: ", listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition)
+                                    + "\n\niLocation == Null");
                     }
                     else if (iLocation.equals("location")) {
                         useIntent(roomInfo, iOldData, true);
-                        log.d("Room Number: ", listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition));
+                        log.d("Room Number: ", listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition)
+                                + "\n\niLocation == location");
                     }
                     else {
                         useIntent(roomInfo, null, false);
-                        log.d("Room Number: ", listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition));
+                        log.d("Room Number: ", listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition)
+                                + "\n\niLocation == other: " + iLocation);
                     }
                 }
                 else {

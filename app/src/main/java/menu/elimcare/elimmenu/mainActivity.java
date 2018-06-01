@@ -29,10 +29,12 @@ public class mainActivity extends AppCompatActivity implements View.OnClickListe
         TextView orders = findViewById(R.id.orders);
         TextView settings = findViewById(R.id.settings);
         TextView location = findViewById(R.id.location);
+        TextView menu = findViewById(R.id.menu);
 
         // create on click listeners
         orders.setOnClickListener(this);
         settings.setOnClickListener(this);
+        menu.setOnClickListener(this);
         location.setOnClickListener(this);
     }
 
@@ -75,24 +77,32 @@ public class mainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(final View view) {
+        Intent intent;
         switch (view.getId()) {
             // load orders class
             case R.id.orders: {
-                Intent iOrder = new Intent(this, orderField.class);
-                startActivity(iOrder);
+                intent = new Intent(this, orderField.class);
+                startActivity(intent);
                 // Toast.makeText(getApplicationContext(),"Test press on textview",Toast.LENGTH_LONG).show();
+                break;
+            }
+            case R.id.location: {
+                intent = new Intent(this, location.class);
+                startActivity(intent);
+                // Toast.makeText(getApplicationContext(),"Test press on textview",Toast.LENGTH_LONG).show();
+                break;
+            }
+            case R.id.menu: {
+                intent = new Intent(this, menu.class);
+                intent.putExtra("menuType", "menu");
+                startActivity(intent);
                 break;
             }
             // load settings class
             case R.id.settings: {
-                Intent iSettings = new Intent(this, settings.class);
-                startActivity(iSettings);
+                intent = new Intent(this, settings.class);
+                startActivity(intent);
                 break;
-            }
-            case R.id.location: {
-                Intent iLocation = new Intent(this, location.class);
-                startActivity(iLocation);
-                // Toast.makeText(getApplicationContext(),"Test press on textview",Toast.LENGTH_LONG).show();
             }
         }
     }

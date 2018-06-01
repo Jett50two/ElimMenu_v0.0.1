@@ -35,71 +35,115 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <TableLayout
+                <View
+                    android:id="@+id/view6"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0" />
 
-                    <TableRow
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/rBeef"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingEnd="10dp"
-                            android:paddingStart="10dp"
-                            android:text="Roast Beef" />
-
-                        <TextView
-                            android:id="@+id/fChicken"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingEnd="10dp"
-                            android:paddingStart="10dp"
-                            android:text="Fried Chicken" />
-
-                        <TextView
-                            android:id="@+id/gChicken"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingEnd="10dp"
-                            android:paddingStart="10dp"
-                            android:text="Grilled Chicken" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/fFish"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="5dp"
-                            android:paddingEnd="10dp"
-                            android:paddingStart="10dp"
-                            android:paddingTop="5dp"
-                            android:text="Fried Fish" />
-
-                        <TextView
-                            android:id="@+id/meatloaf"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingEnd="10dp"
-                            android:paddingStart="10dp"
-                            android:text="Meatloaf" />
-
-                        <TextView
+                        <CheckBox
                             android:id="@+id/spagh"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingEnd="10dp"
-                            android:paddingStart="10dp"
-                            android:text="Spaghetti" />
-                    </TableRow>
+                            android:padding="4dp"
+                            android:paddingStart="8dp"
+                            android:text="Spaghetti"
+                            android:textAlignment="textStart"
+                            android:textSize="24sp" />
 
-                </TableLayout>
+                        <View
+                            android:id="@+id/view7"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="#c0c0c0" />
+
+                        <CheckBox
+                            android:id="@+id/meatloaf"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:paddingStart="8dp"
+                            android:text="Meatloaf"
+                            android:textAlignment="textStart"
+                            android:textSize="24sp" />
+
+                        <View
+                            android:id="@+id/view8"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="#c0c0c0" />
+
+                        <CheckBox
+                            android:id="@+id/fFish"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:paddingStart="8dp"
+                            android:text="Fried Fish"
+                            android:textAlignment="textStart"
+                            android:textSize="24sp" />
+
+                        <View
+                            android:id="@+id/view9"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="#c0c0c0" />
+
+                        <CheckBox
+                            android:id="@+id/fChicken"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:paddingStart="8dp"
+                            android:text="Fried Chicken"
+                            android:textAlignment="textStart"
+                            android:textSize="24sp" />
+
+                        <View
+                            android:id="@+id/view10"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="#c0c0c0" />
+
+                        <CheckBox
+                            android:id="@+id/rBeef"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:paddingStart="8dp"
+                            android:text="Roast Beef"
+                            android:textAlignment="textStart"
+                            android:textSize="24sp" />
+
+                        <View
+                            android:id="@+id/view11"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="#c0c0c0" />
+
+                        <CheckBox
+                            android:id="@+id/gChicken"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:paddingStart="8dp"
+                            android:text="Grilled Chicken"
+                            android:textAlignment="textStart"
+                            android:textSize="24sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -109,44 +153,57 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <TableLayout
+                <View
+                    android:id="@+id/view13"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0" />
 
-                    <TableRow
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <CheckBox
+                        android:id="@+id/burger"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:paddingStart="10dp"
+                        android:text="Burger"
+                        android:textSize="24sp" />
 
-                        <TextView
-                            android:id="@+id/burger"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingEnd="10dp"
-                            android:paddingStart="10dp"
-                            android:text="Burger" />
-
-                        <TextView
-                            android:id="@+id/blt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingEnd="15dp"
-                            android:paddingStart="15dp"
-                            android:text="BLT" />
-
-                        <TextView
-                            android:id="@+id/cbrw"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingEnd="10dp"
-                            android:paddingStart="10dp"
-                            android:text="Chicken Bacon Ranch Wrap" />
-                    </TableRow>
-
-                    <TableRow
+                    <View
+                        android:id="@+id/view14"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="2dp"
+                        android:background="#c0c0c0" />
 
-                </TableLayout>
+                    <CheckBox
+                        android:id="@+id/blt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:paddingStart="10dp"
+                        android:text="BLT"
+                        android:textSize="24sp" />
+
+                    <View
+                        android:id="@+id/view15"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="#c0c0c0" />
+
+                    <CheckBox
+                        android:id="@+id/cbrw"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:paddingStart="10dp"
+                        android:text="Chicken Bacon Ranch Wrap"
+                        android:textSize="24sp" />
+
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -156,43 +213,57 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <TableLayout
+                <View
+                    android:id="@+id/view17"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0" />
 
-                    <TableRow
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <CheckBox
+                        android:id="@+id/coSalad"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:paddingStart="10dp"
+                        android:text="Chicken Oriental"
+                        android:textSize="24sp" />
 
-                        <TextView
-                            android:id="@+id/coSalad"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingEnd="10dp"
-                            android:paddingStart="10dp"
-                            android:text="Chicken Oriental" />
-
-                        <TextView
-                            android:id="@+id/dinnerSalad"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingEnd="15dp"
-                            android:paddingStart="15dp"
-                            android:text="Dinner Salad" />
-
-                        <TextView
-                            android:id="@+id/textView33"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingEnd="10dp"
-                            android:paddingStart="10dp" />
-                    </TableRow>
-
-                    <TableRow
+                    <View
+                        android:id="@+id/view18"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="2dp"
+                        android:background="#c0c0c0" />
 
-                </TableLayout>
+                    <CheckBox
+                        android:id="@+id/dinnerSalad"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:paddingStart="10dp"
+                        android:text="Dinner Salad"
+                        android:textSize="24sp" />
+
+                    <View
+                        android:id="@+id/view19"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="#c0c0c0" />
+
+                    <TextView
+                        android:id="@+id/textView33"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:paddingStart="10dp"
+                        android:textSize="24sp"
+                        android:visibility="gone" />
+
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -202,51 +273,56 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <TableLayout
+                <View
+                    android:id="@+id/view20"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0" />
 
-                    <TableRow
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <CheckBox
+                        android:id="@+id/tomatoSoup"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:paddingStart="10dp"
+                        android:text="Tomato"
+                        android:textSize="24sp" />
 
-                        <TextView
-                            android:id="@+id/chickenSoup"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingEnd="10dp"
-                            android:paddingStart="10dp"
-                            android:text="Chicken Noodle" />
-
-                        <TextView
-                            android:id="@+id/tomatoSoup"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingEnd="15dp"
-                            android:paddingStart="15dp"
-                            android:text="Tomato" />
-
-                        <TextView
-                            android:id="@+id/SOD"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingEnd="10dp"
-                            android:paddingStart="10dp"
-                            android:text="SOD" />
-                    </TableRow>
-
-                    <TableRow
+                    <View
+                        android:id="@+id/view21"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="2dp"
+                        android:background="#c0c0c0" />
 
-                    <TableRow
+                    <CheckBox
+                        android:id="@+id/chickenSoup"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:paddingStart="10dp"
+                        android:text="Chicken Noodle"
+                        android:textSize="24sp" />
 
-                    <TableRow
+                    <View
+                        android:id="@+id/view22"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                </TableLayout>
+                        android:layout_height="2dp"
+                        android:background="#c0c0c0" />
+
+                    <CheckBox
+                        android:id="@+id/sod"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:paddingStart="10dp"
+                        android:text="SOD"
+                        android:textSize="24sp" />
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -255,7 +331,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -265,38 +341,74 @@
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
+                <View
+                    android:id="@+id/view23"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0" />
+
                 <CheckBox
-                    android:id="@+id/check0"
+                    android:id="@+id/mashedPotatos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="5dp"
-                    android:text="Mahsed Potatos" />
+                    android:text="Mashed Potatos"
+                    android:textSize="24sp" />
+
+                <View
+                    android:id="@+id/view24"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0" />
 
                 <CheckBox
-                    android:id="@+id/check1"
+                    android:id="@+id/potatoChips"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="Potato Chips" />
+                    android:text="Potato Chips"
+                    android:textSize="24sp" />
+
+                <View
+                    android:id="@+id/view25"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0" />
 
                 <CheckBox
-                    android:id="@+id/check2"
+                    android:id="@+id/carrots"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="Carrots" />
+                    android:text="Carrots"
+                    android:textSize="24sp" />
+
+                <View
+                    android:id="@+id/view26"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0" />
 
                 <CheckBox
-                    android:id="@+id/check3"
+                    android:id="@+id/peas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="Peas" />
+                    android:text="Peas"
+                    android:textSize="24sp" />
+
+                <View
+                    android:id="@+id/view27"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:orientation="horizontal">
 
                     <CheckBox
@@ -305,17 +417,114 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:padding="5dp"
-                        android:text="Other:" />
+                        android:text="Other:"
+                        android:textSize="24sp" />
 
                     <EditText
                         android:id="@+id/etOther"
-                        android:layout_width="wrap_content"
+                        android:layout_width="208dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
                         android:inputType="textPersonName"
-                        android:padding="5dp" />
+                        android:padding="5dp"
+                        android:textSize="24sp" />
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layDrink"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Drinks"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/view28"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0" />
+
+                <CheckBox
+                    android:id="@+id/milk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Milk"
+                    android:textSize="24sp" />
+
+                <View
+                    android:id="@+id/view29"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0" />
+
+                <CheckBox
+                    android:id="@+id/chocoMilk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Chocolate Milk"
+                    android:textSize="24sp" />
+
+                <View
+                    android:id="@+id/view30"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0" />
+
+                <CheckBox
+                    android:id="@+id/aj"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Apple Juice"
+                    android:textSize="24sp" />
+
+                <View
+                    android:id="@+id/view31"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0" />
+
+                <CheckBox
+                    android:id="@+id/cran"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cranberry Juice"
+                    android:textSize="24sp" />
+
+                <View
+                    android:id="@+id/view32"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0" />
+
+                <CheckBox
+                    android:id="@+id/prune"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Prune Juice"
+                    android:textSize="24sp" />
+
+                <View
+                    android:id="@+id/view33"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0" />
+
+                <CheckBox
+                    android:id="@+id/oj"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Orange Juice"
+                    android:textSize="24sp" />
 
             </LinearLayout>
 
@@ -324,7 +533,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <TextView
                     android:id="@+id/textView36"
@@ -335,54 +544,111 @@
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
+                <View
+                    android:id="@+id/view34"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0" />
+
                 <CheckBox
                     android:id="@+id/fDessert"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="feature" />
+                    android:text="feature"
+                    android:textSize="24sp" />
+
+                <View
+                    android:id="@+id/view35"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0" />
 
                 <CheckBox
-                    android:id="@+id/check4"
+                    android:id="@+id/iceCream"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Ice Cream" />
+                    android:text="Ice Cream"
+                    android:textSize="24sp" />
+
+                <View
+                    android:id="@+id/view36"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0" />
 
                 <CheckBox
-                    android:id="@+id/check5"
+                    android:id="@+id/jello"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Jello" />
+                    android:text="Jello"
+                    android:textSize="24sp" />
+
+                <View
+                    android:id="@+id/view37"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0" />
 
                 <CheckBox
-                    android:id="@+id/check6"
+                    android:id="@+id/yogurt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Yogurt" />
+                    android:text="Yogurt"
+                    android:textSize="24sp" />
+
+                <View
+                    android:id="@+id/view38"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0" />
 
                 <CheckBox
-                    android:id="@+id/check7"
+                    android:id="@+id/peaches"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Peaches" />
+                    android:text="Peaches"
+                    android:textSize="24sp" />
+
+                <View
+                    android:id="@+id/view39"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0" />
 
                 <CheckBox
-                    android:id="@+id/check8"
+                    android:id="@+id/pears"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Pears" />
+                    android:text="Pears"
+                    android:textSize="24sp" />
+
+                <View
+                    android:id="@+id/view40"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0" />
 
                 <CheckBox
-                    android:id="@+id/check9"
+                    android:id="@+id/appleSauce"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Apple Sauce" />
+                    android:text="Apple Sauce"
+                    android:textSize="24sp" />
 
             </LinearLayout>
 
+            <View
+                android:id="@+id/view42"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0" />
+
             <LinearLayout
+                android:id="@+id/layButtons"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="visible">
 
                 <Button
                     android:id="@+id/btnBack"
@@ -397,11 +663,11 @@
                     android:layout_weight="1" />
 
                 <Button
-                    android:id="@+id/btnSave"
+                    android:id="@+id/btnApply"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Save" />
+                    android:text="APPLY" />
             </LinearLayout>
 
         </LinearLayout>
