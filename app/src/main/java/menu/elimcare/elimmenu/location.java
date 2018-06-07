@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by Omega on 3/1/2018.
+ * Created by Tim C on 3/1/2018.
  */
 
 public class location extends AppCompatActivity {

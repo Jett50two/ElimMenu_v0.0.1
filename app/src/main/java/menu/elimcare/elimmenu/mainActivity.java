@@ -14,6 +14,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+/**
+ * Created by Tim C on 3/1/2018.
+ */
+
 public class mainActivity extends AppCompatActivity implements View.OnClickListener {
     // save and load class
     public saveAndLoad sAndL;
