@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="menu.elimcare.elimmenu.BluetoothActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnFindUnpairedDevices"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="btnDiscover"
+                    android:text="Discover" />
+
+                <Button
+                    android:id="@+id/btnONOFF"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_weight="1"
+                    android:text="ON/OFF" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnDiscoverable_on_off"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:onClick="btnEnableDisable_Discoverable"
+                android:text="Enable Discoverable" />
+
+            <Button
+                android:id="@+id/btnStartConnection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnFindUnpairedDevices"
+                android:layout_marginTop="10dp"
+                android:text="Start Connection" />
+
+            <ListView
+                android:id="@+id/lvNewDevices"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnStartConnection"
+                android:layout_marginTop="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/lvNewDevices"
+                    android:layout_weight="1"
+                    android:hint="Enter Text Here" />
+
+                <Button
+                    android:id="@+id/btnSend"
+                    android:layout_width="179dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lvNewDevices"
+                    android:layout_toRightOf="@+id/editText"
+                    android:layout_weight="1"
+                    android:text="SEND" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/incomingMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>
