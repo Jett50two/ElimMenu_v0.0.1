@@ -24,7 +24,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.UUID;
 
-
+// REFERENCE: https://www.youtube.com/watch?v=sifzY2SA1XU&ab_channel=CodingWithMitch
 public class BluetoothActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
     private static final String TAG = "BluetoothActivity";
 
